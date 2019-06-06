@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="fyu0h"><title>KMS服务~一句命令激活WINDOWS/OFFICE · ‘S MEMORY</title><meta name="description" content="服务器地址：iinin.me
+Winodws激活:
+1.以管理员方式运行CMD
+2.依次输入下列命令:
+12slmgr /skms iinin.meslmgr /ato
+
+Office激活
+请看下文中详细教程
+服务作用：在线激活windows和office
+适用对象：VOL版本的windows和of"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title><a href="/">‘S MEMORY</a></h3><div class="description"><p>忆往昔</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Arquivo</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>KMS服务~一句命令激活WINDOWS/OFFICE</a></h3></div><div class="post-content"><p><strong>服务器地址：iinin.me</strong></p>
+<p><strong>Winodws激活:</strong></p>
+<p>1.以管理员方式运行CMD</p>
+<p>2.依次输入下列命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slmgr /skms iinin.me</span><br><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure>
+
+<p>Office激活</p>
+<p>请看下文中详细教程</p>
+<p>服务作用：在线激活windows和office</p>
+<p>适用对象：VOL版本的windows和office</p>
+<p>适用版本：截止到win10和office2016的所有版本</p>
+<p>服务时间：24H</p>
+<p>优点：在线激活 省时省力 无需安装软件 干净环保 命令简单</p>
+<p>缺点：服务器不挂的话自动重新授权到服务器挂（服务器挂了还能继续180天，期间早修好啦</p>
+<h4 id="搭建教程"><a href="#搭建教程" class="headerlink" title="搭建教程"></a>搭建教程</h4><p>安装过程其实非常简单，安装好git和py-kms的python依赖包argparse就好了，而这一切只需要yum就OK了。具体步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git python-argparse</span><br><span class="line">cd /usr/local/ git clone</span><br><span class="line">https://github.com/myanaloglife/py-kms.git</span><br></pre></td></tr></table></figure>
+
+<p>这样就把py-kms安装到了/usr/local/py-kms下了。</p>
+<p>使用方法也很简单，直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup /usr/bin/python /usr/local/py-kms/server.py &gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
+
+<p>这样就会后台驻守。</p>
+<p>如果你使用了防火墙，比如iptables，那么请允许1688端口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sbin/iptables -I INPUT -p tcp –dport 1688 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用方法-原文"><a href="#使用方法-原文" class="headerlink" title="使用方法(原文)"></a>使用方法(<a href="https://03k.org/kms.html" target="_blank" rel="noopener">原文</a>)</h4><p>Winodws激活</p>
+<p>一般来说，只要确保的下载的是VL批量版本并且没有手动安装过任何key，</p>
+<p>你只需要使用管理员权限运行cmd执行一句命令就足够：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slmgr /skms iinin.me</span><br></pre></td></tr></table></figure>
+
+<p>这句命令的意思是，把kms服务器地址设置（set kms）为iinin.me</p>
+<p>然后去计算机属性或者控制面板其他的什么的地方点一下激活就好了。</p>
+<p>当然，如果你懒得点，可以多打一句命令手动激活：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure>
+
+<p>这句命令的意思是，马上对当前设置的key和服务器地址等进行尝试激活操作。</p>
+<p>kms激活的前提是你的系统是批量授权版本，即VL版，一般企业版都是VL版，专业版有零售和VL版，家庭版旗舰版OEM版等等那就肯定不能用kms激活。一般建议从<a href="http://www.itellyou.cn/" target="_blank" rel="noopener">msdn我告诉你</a>上面下载系统，这里放个图举例说明哪些是VL版本：</p>
+<p><img src="https://03k.org/wp-content/uploads/2015/11/vl-ver.png" alt="vl-ver"></p>
+<p>VL版本的镜像一般内置GVLK key，用于kms激活。如果你手动输过其他key，那么这个内置的key就会被替换掉，这个时候如果你想用kms，那么就需要把GVLK key输回去。首先，</p>
+<p>到<a href="https://technet.microsoft.com/en-us/library/jj612867.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/jj612867.aspx</a>获取你对应版本的KEY</p>
+<p>如果连接打不开，可以使用备用连接：<a href="https://03k.org/kmskey.html" target="_blank" rel="noopener">https://03k.org/kmskey.html</a></p>
+<p>如果不知道自己的系统是什么版本，可以运行以下命令查看系统版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic os get caption</span><br></pre></td></tr></table></figure>
+
+<p>得到对应key之后，使用管理员权限运行cmd执行安装key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ipk xxxxx-xxxxx-xxxxx-xxxxx</span><br></pre></td></tr></table></figure>
+
+<p>然后跟上面说的一样设置kms服务器地址，激活。</p>
+<h4 id="Office激活"><a href="#Office激活" class="headerlink" title="Office激活"></a>Office激活</h4><h4 id="首先你的OFFICE必须是VOL版本，否则无法激活。"><a href="#首先你的OFFICE必须是VOL版本，否则无法激活。" class="headerlink" title="首先你的OFFICE必须是VOL版本，否则无法激活。"></a>首先你的OFFICE必须是VOL版本，否则无法激活。</h4><p>找到你的office安装目录，比如C:\Program Files (x86)\Microsoft Office\Office16</p>
+<p>64位的就是C:\Program Files\Microsoft Office\Office16</p>
+<p>office16是office2016，office15就是2013，office14就是2010.</p>
+<p>然后目录对的话，该目录下面应该有个OSPP.VBS。</p>
+<p>接下来我们就cd到这个目录下面，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd C:\Program Files (x86)\Microsoft Office\Office16</span><br></pre></td></tr></table></figure>
+
+<p>然后执行注册kms服务器地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript ospp.vbs /sethst:iinin.me</span><br></pre></td></tr></table></figure>
+
+<p>/sethst参数就是指定kms服务器地址。</p>
+<p>一般ospp.vbs可以拖进去cmd窗口，所以也可以这么弄：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript “C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS” /sethst:iinin.me</span><br></pre></td></tr></table></figure>
+
+<p>一般来说，“一句命令已经完成了”，但一般office不会马上连接kms服务器进行激活，所以我们额外补充一条手动激活命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript ospp.vbs /act</span><br></pre></td></tr></table></figure>
+
+<p>如果提示看到successful的字样，那么就是激活成功了，重新打开office就好。</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-04-16</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://iinin.me/2017/04/16/KMS服务-一句命令激活WINDOWS-OFFICE/,‘S MEMORY,KMS服务~一句命令激活WINDOWS/OFFICE,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2017/04/17/WORDPRESS迁移至GHOST笔记/" title="WORDPRESS迁移至GHOST笔记">Post Anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2017/04/16/PERMITTED/" title="root用户删除文件提示：operation">Próximo post</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
