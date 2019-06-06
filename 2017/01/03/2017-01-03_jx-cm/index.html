@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="bigback"><title>江西移动现状分析 · ‘s Memory</title><meta name="description" content="江西移动于2016年年末对计费系统进行了改造升级，首先是针对10.xx内网段进行升级导致所有老套路干扰失效，随后对100.xx段也进行了升级，至此江西南昌地区移动免流基本和谐。
+优先级（检测时间2017/1/1）:
+HTTP部分
+M&amp;gt;H&amp;gt;XH检测XH空首H有网HTTPS
+H&amp;gt;XH&amp;"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">‘s Memory</a></h3><div class="description"><p>忆往昔</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>江西移动现状分析</a></h3></div><div class="post-content"><p>江西移动于2016年年末对计费系统进行了改造升级，首先是针对10.xx内网段进行升级导致所有老套路干扰失效，随后对100.xx段也进行了升级，至此江西南昌地区移动免流基本和谐。</p>
+<p>优先级（检测时间2017/1/1）:</p>
+<p>HTTP部分</p>
+<p>M&gt;H&gt;XH<br>检测XH<br>空首H有网<br>HTTPS</p>
+<p>H&gt;XH&gt;M<br>不检测XH<br>空首H无网<br>干扰：</p>
+<p>真H前加文字、符号无网<br>\n 被检测跳转<br>\t 空格无效<br>\r似乎无效</p>
+<p>现状分析及对策：</p>
+<p>那么来看看最近半和谐（部分地区能用）的模式:</p>
+<p><code>[M] [U] [V]\r\nHost:\r wap.10086.cn\r\nHost: [H]\r\n</code></p>
+<p>很精妙的双H,虽然放在以前是肯定不能用的，达不到伪装的目的，但随着加大对\r的和谐力度，这反倒成了能够利用起来的伪装，运营商绕过\r检测到后面的免流Host,误认为第一个Host为真，而网关则不能够以第一个Host联网，所以自然就达到了免流的目的。</p>
+<p>但这模式和谐也很容易，再往下抓取Host，真实H就随之被扫出来，所谓道高一尺魔高一丈，上有政策下有对策，我们当然不能放任运营商作威作福，所以还可以在此基础上进行改动，如下:</p>
+<p>改法一:</p>
+<p><code>[M] [U] [V]\r\nHos:\n wap.10086.cn\r\nHost: [H]\r\n</code></p>
+<p>改法二:</p>
+<p><code>[M] [U] [V]\r\nHost:\r wap.10086.cn \rHost:\n wap.10086.cn\r\nHost: [H]\r\n</code></p>
+<p>在原来的基础上再添加一个Host，效果不言而喻</p>
+<p>改法三:</p>
+<p><code>[M] [U] [V]\r\nHost:\r wap.10086.cn \rHost:\n wap.10086.cn\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p>进一步加强伪装，不过这时候就要考虑联网问题了，伪装增多的同时也会影响网关的判断</p>
+<p>还有更多的改法，核心不变……</p>
+<p>其实看到这个双H我们不难想到以前一个模式:</p>
+<p>②<code>[M] [U] [V]\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p><code>[M] [U] [V]\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p>这同样是当初很经典的模式，相信很多人都想复活，只是为什么会和谐呢？不妨来看看我在半和谐时期做的改动:</p>
+<p>改动一:</p>
+<p><code>[M] [U] [V]\r\r \rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p><code>[M] [U] [V]\r\r \rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p>改动二:</p>
+<p><code>[M] [U] [V]\r万象\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p><code>[M] [U] [V]\r万象\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p>改动三:</p>
+<p><code>[M] [U] [V]\r\r10086\rHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+<p>可以说每一次改动都极大地降低了跳点，这说明运营商并不是以检测首头的完整度来扣费的，所以，我们可以在此基础上结合模式①，来思考新的模式。</p>
+<p>已知②的模式已经无法联网，所以我们可以这样:</p>
+<p><code>[M] [U] [V]\rHost: wap.10086.cn\r\nHost:\r wap.10086.cn\r\nHost: [H]\r\n</code></p>
+<p>还可以这样:</p>
+<p><code>[M] [U] [V]\rHost: wap.10086.cn\r\nHost:\n wa. 10086.cn \nHost: [H]\r\nHost: wap.10086.cn\r\n</code></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-01-03</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://iinin.me/2017/01/03/2017-01-03_jx-cm/,‘s Memory,江西移动现状分析,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2017/01/03/2017-01-03_compare-xproxy/" title="zProxy TinyProxy rProxy搭建及对比">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2016/10/01/2016-10-01_wndr3800/" title="网件WNDR3800 使用OpenWrt Chaos Calmer 15.05单线多拨教程">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
