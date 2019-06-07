@@ -10,27 +10,32 @@
 <p>从以下地址下载工具包：<a href="http://devtools.qiniu.com/qshell-v2.2.0.zip?ref=developer.qiniu.com" target="_blank" rel="noopener">点击下载</a></p>
 <p>解压后，得到的文件夹中存在对应三种操作系统的程序。</p>
 <p>解压, 将 qshell-darwin-x64 放到 /usr/local/bin 或 ~/bin 下，更名 qshell-darwin-x64 为 qshell。</p>
-<p>##三、七牛账户密钥设置</p>
+<p>##三、<code>七牛账户密钥设置</code></p>
 <p>使用 qshell 操作七牛空间，需要添加账户密钥 AccessKey 和 SecretKey, 赋予 qshell 权限。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell account #AccessKey# #SecretKey#</span><br></pre></td></tr></table></figure>
 
 <p>##四、转移失效空间文件至新空间</p>
 <p>使用listbucket命令列举出失效空间内的文件列表</p>
-<p>命令用法：<code>qshell listbucket &lt;Bucket&gt; [&lt;Prefix&gt;] &lt;ListBucketResultFile&gt;</code></p>
-<p>本例中命令如下：</p>
-<p><code>qshell listbucket old cpt.txt</code></p>
-<p>上述操作后会在当前目录下生成一个名为cpt.txt的list文件列表，而我们只需要得到最前的key就可以了，可以使用一条awk字符处理命令:</p>
-<p><code>cat cpt.txt | awk &#39;{print $1}&#39; &gt;cpt.txt</code></p>
-<p>随后使用batchcopy命令将文件同步到需要复制的新空间中</p>
-<p><code>qshell batchcopy old new cpt.txt</code></p>
-<p>这一步会提示让你确认操作，输入他随机生成的英文就行了，例如：</p>
-<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">qshell batchcopy old new cpt.txt</span><br><span class="line"></span><br><span class="line">&lt;DANGER&gt; Input ditdxc to confirm operation: ditdxc</span><br><span class="line"></span><br><span class="line">**ALL** Copyed!</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">##五、从新建空间中下载所有文件</span><br><span class="line"></span><br><span class="line">用如下命令将新建空间 new 中的所有文件同步至本地目录：</span><br></pre></td></tr></table></figure></p>
-<p>qshell.exe qdownload download.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中 download.conf 为下载配置文件，在工作目录中创建，内容按如下填写：</span><br></pre></td></tr></table></figure>
+<p>命令用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell listbucket &lt;Bucket&gt; [&lt;Prefix&gt;] &lt;ListBucketResultFile&gt;</span><br></pre></td></tr></table></figure>
 
-<p>{
-“dest_dir” : “F:\11”,#注意是两条斜杆<br>“bucket” : “new”,<br>“cdn_domain” : “######.bkt.clouddn.com”<br>}
-```</p>
+<p>本例中命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell listbucket old cpt.txt</span><br></pre></td></tr></table></figure>
+
+<p>上述操作后会在当前目录下生成一个名为cpt.txt的list文件列表，而我们只需要得到最前的key就可以了，可以使用一条awk字符处理命令:</p>
+<p>随后使用batchcopy命令将文件同步到需要复制的新空间中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell batchcopy old new cpt.txt</span><br></pre></td></tr></table></figure>
+
+<p>这一步会提示让你确认操作，输入他随机生成的英文就行了，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qshell batchcopy old new cpt.txt</span><br><span class="line"></span><br><span class="line">&lt;DANGER&gt; Input ditdxc to confirm operation: ditdxc</span><br><span class="line"></span><br><span class="line">**ALL** Copyed!</span><br></pre></td></tr></table></figure>
+
+<p>##五、从新建空间中下载所有文件</p>
+<p>用如下命令将新建空间 new 中的所有文件同步至本地目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell.exe qdownload download.conf</span><br></pre></td></tr></table></figure>
+
+<p>其中 download.conf 为下载配置文件，在工作目录中创建，内容按如下填写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;dest_dir&quot; : &quot;F:\\11&quot;,#注意是两条斜杆</span><br><span class="line">&quot;bucket&quot; : &quot;new&quot;,</span><br><span class="line">&quot;cdn_domain&quot; : &quot;######.bkt.clouddn.com&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>注意</strong>：”cdn_domain”如果不配置为测试域名，则 qshell 下载文件不走 CDN 免费流量，需支付流量费。</p>
 <p>执行下载命令后，稍等片刻，便能在本地下载目录中看到失而复得的文件。再上传到nas，因为文件名没变，批量修改博客中图片外链的前缀地址，图片就能恢复显示。</p>
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-06-07</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://iinin.me/2019/06/07/七牛云测试域名到期失效后，下载空间文件办法/,‘S MEMORY,七牛云测试域名到期失效后，下载空间文件办法,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2017/11/11/念七年/" title="念七年">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
